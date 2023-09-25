@@ -4,7 +4,6 @@ import axios from "axios";
 import toast from "react-hot-toast";
 
 const Card = ({ title, content, id, date, user }) => {
-
   const deleteHandler = async (id) => {
     if (window.confirm("Are you sure?")) {
       try {

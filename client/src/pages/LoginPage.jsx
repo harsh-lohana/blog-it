@@ -40,9 +40,9 @@ const LoginPage = () => {
   };
 
   const revealTestUSer = () => {
-    toast("E-Mail: test@test.com\nPassword: test", {
-      duration: 5000,
-    });
+    setEmail("test@test.com");
+    setPassword("test");
+    toast.success("Test user revealed!");
   };
 
   return (

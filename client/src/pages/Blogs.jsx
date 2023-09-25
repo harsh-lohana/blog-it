@@ -47,8 +47,14 @@ const Blogs = ({ search, setSearch }) => {
           <Loader />
         ) : (
           blogs
-            .filter((filteredBlog) =>
-              filteredBlog.title.toLowerCase().includes(search.toLowerCase()) || filteredBlog.content.toLowerCase().includes(search.toLowerCase())
+            .filter(
+              (filteredBlog) =>
+                filteredBlog.title
+                  .toLowerCase()
+                  .includes(search.toLowerCase()) ||
+                filteredBlog.content
+                  .toLowerCase()
+                  .includes(search.toLowerCase())
             )
             .map((blog) => {
               return (
