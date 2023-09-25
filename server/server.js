@@ -2,8 +2,9 @@ const express = require("express");
 const dotenv = require("dotenv");
 const connectDB = require("./config/database");
 const userRouter = require("./routes/userRoutes");
-const blogRouter = require("./routes/blogRoutes") 
+const blogRouter = require("./routes/blogRoutes");
 const { notFound, errorHandler } = require("./middlewares/errorMiddleware");
+const path = require("path");
 
 const app = express();
 dotenv.config();
@@ -15,9 +16,21 @@ app.use(errorHandler);
 app.use("/api/users", userRouter);
 app.use("/api/blogs", blogRouter);
 
-app.get("/", (req, res) => {
-  return res.send("API is running!");
-});
+// ---------- depolyment ----------
+
+const __currdir = path.resolve();
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__currdir, "/client/dist")));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__currdir, "client", "dist", "index.html"));
+  });
+} else {
+  app.get("/", (req, res) => {
+    return res.send("API is running!");
+  });
+}
+
+// ---------- depolyment ----------
 
 const PORT = process.env.PORT || 5000;
 
